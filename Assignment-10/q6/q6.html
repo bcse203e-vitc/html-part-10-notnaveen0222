@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layered Image Gallery</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #222;
+            margin: 0;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .gallery {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+        .gallery img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s, z-index 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #ffcc00;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ffaa00;
+        }
+    </style>
+</head>
+<body>
+
+<div class="gallery">
+    <img id="img1" src="image1.png" alt="Image 1" style="z-index: 1;">
+    <img id="img2" src="image2.png" alt="Image 2" style="z-index: 2;">
+    <img id="img3" src="image3.png" alt="Image 3" style="z-index: 3;">
+</div>
+
+<div class="buttons">
+    <button onclick="bringToFront('img1')">Bring Image 1 to Front</button>
+    <button onclick="bringToFront('img2')">Bring Image 2 to Front</button>
+    <button onclick="bringToFront('img3')">Bring Image 3 to Front</button>
+</div>
+
+<script>
+    function bringToFront(imageId) {
+        let clickedImage = document.getElementById(imageId);
+        let images = document.querySelectorAll(".gallery img");
+        let maxZ = Math.max(...Array.from(images).map(img => parseInt(img.style.zIndex)));
+        clickedImage.style.zIndex = maxZ + 1;
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
